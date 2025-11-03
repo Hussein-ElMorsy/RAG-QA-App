@@ -37,3 +37,22 @@ def process_document_to_chroma_db(file_name):
         persist_directory=f"{working_dir}/doc_vectordb",
     )
     return 0;
+
+def answer_question(user_prompt):
+    # load the presistent chroma vector database
+    vectordb = Chroma(
+        persist_directory=f"{working_dir}/doc_vectordb",
+        embedding_function=embedding,
+    )
+    # create a retriever for document search
+    retriever = vectordb.as_retriever()
+    # create a retriever chain to ansswer user questions
+    qa_chain = RetrievalQA.from_chain_type(
+        llm=llm,
+        chain_type="stuff",
+        retriever=retriever,
+    ) 
+    response = qa_chain.invoke({"query": user_prompt})
+    answer = response["result"]
+    return answer
+
