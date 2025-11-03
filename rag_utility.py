@@ -7,7 +7,7 @@ from langchain_chroma import Chroma
 from langchain_groq import ChatGroq
 from langchain_classic.chains import RetrievalQA
 
-_ = load_dotenv(find_dotenv())
+#_ = load_dotenv(find_dotenv())
 
 working_dir = os.path.dirname(os.path.abspath((__file__)))
 
