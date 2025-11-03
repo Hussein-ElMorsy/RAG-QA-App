@@ -1,5 +1,5 @@
 python-dotenv
-sreamlit
+streamlit
 langchain
 langchain-community
 langchain-text-splitters
