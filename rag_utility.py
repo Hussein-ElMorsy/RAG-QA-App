@@ -1,16 +1,21 @@
-import os from dotenv 
-import load_dotenv, find_dotenv from langchain_community.document_loaders 
-import PyPDFLoader from langchain_text_splitters 
-import RecursiveCharacterTextSplitter from langchain_huggingface 
-import HuggingFaceEmbeddings from langchain_chroma 
-import Chroma from langchain_groq 
-import ChatGroq from langchain.chains 
-import RetrievalQA _ = load_dotenv(find_dotenv()) 
+import os 
+from dotenv import load_dotenv, find_dotenv 
+from langchain_community.document_loaders import PyPDFLoader 
+from langchain_text_splitters import RecursiveCharacterTextSplitter 
+from langchain_huggingface import HuggingFaceEmbeddings 
+from langchain_chroma import Chroma 
+from langchain_groq import ChatGroq 
+from langchain.chains import RetrievalQA 
+
+_ = load_dotenv(find_dotenv()) 
 working_dir = os.path.dirname(os.path.abspath((__file__))) 
+
 # load the embedding model 
 embedding = HuggingFaceEmbeddings() 
+
 # load the llm from groq 
 llm = ChatGroq( model='llama-3.3-70b-versatile', temperature=0, ) 
+
 def process_document_to_chroma_db(file_name): 
     # load the pdfdocument 
     loader = PyPDFLoader(f"{working_dir}/{file_name}") 
